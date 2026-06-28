@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indeksa - Find any screenshot. Instantly.</title>
+    <style>
+        /* CSS Variables for strict theme adherence */
+        :root {
+            --bg-color: #0A0A0A;
+            --card-bg: #121212;
+            --text-main: #FFFFFF;
+            --text-muted: #888888;
+            --accent-red: #FF3B30;
+            --font-stack: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-stack);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Premium Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            border-radius: 99px;
+            font-weight: 500;
+            font-size: 1.125rem;
+            letter-spacing: 0.01em;
+            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-red);
+            color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(255, 59, 48, 0.15);
+        }
+
+        .btn-primary:hover {
+            background-color: #FF4A40;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 24px rgba(255, 59, 48, 0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 2px 10px rgba(255, 59, 48, 0.1);
+        }
+
+        .btn-secondary {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background-color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Spacing & Alignment */
+        section {
+            padding: 120px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Hero Section */
+        #hero {
+            padding-top: 80px;
+            padding-bottom: 140px;
+        }
+
+        #hero p {
+            max-width: 580px;
+            margin: 0 auto 40px auto;
+            font-size: 1.25rem;
+        }
+
+        .hero-meta {
+            margin-top: 20px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        /* Features Section */
+        #features .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        /* Privacy Section */
+        #privacy p {
+            max-width: 640px;
+            margin: 0 auto 40px auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Feedback Section */
+        #feedback {
+            padding-bottom: 160px;
+        }
+
+        #feedback p {
+            margin: 0 auto 40px auto;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #141414;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Subtle Animations */
+        .fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            section { padding: 80px 0; }
+            #hero { padding-top: 60px; padding-bottom: 100px; }
+            .card { padding: 32px; }
+            footer .container { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; width: 100%; flex-wrap: wrap; gap: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Indeksa</div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="text-center container fade-in">
+            <h1>Find any screenshot.<br>Instantly.</h1>
+            <p class="fade-in delay-1">Screenshots are indexed locally on-device, extracting text through OCR to make your entire gallery instantly searchable.</p>
+            <div class="fade-in delay-2">
+               <a href="Indeksa-v1.0.apk" download class="btn btn-primary">
+    Download APK
+</a>
+                <div class="hero-meta">Android 10+ &bull; Free</div>
+            </div>
+        </section>
+
+        <section id="features" class="container text-center">
+            <div class="grid">
+                <div class="card fade-in delay-1">
+                    <h3>Fast</h3>
+                    <p>Search results appear instantly as you type. No waiting for cloud servers or internet connections.</p>
+                </div>
+                <div class="card fade-in delay-2">
+                    <h3>Private</h3>
+                    <p>Built with a completely offline architecture. Everything stays right where it belongs—on your phone.</p>
+                </div>
+                <div class="card fade-in delay-3">
+                    <h3>Lightweight</h3>
+                    <p>Optimized for battery life and storage, leaving a minimal footprint on your device's resources.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="privacy" class="container text-center fade-in">
+            <h2>Your data is yours.</h2>
+            <p>Screenshots, OCR processing, and indexing stay entirely on your device. We guarantee that no screenshots, images, or extracted text are ever uploaded, collected, or shared with anyone.</p>
+            <div class="button-group">
+                <a href="#privacy-policy" class="btn btn-secondary">Privacy Policy</a>
+                <a href="#terms" class="btn btn-secondary">Terms & Conditions</a>
+            </div>
+        </section>
+
+        <section id="feedback" class="container text-center fade-in delay-1">
+            <h2>Have feedback?</h2>
+            <p>We are always looking to improve. Send us your thoughts or feature requests.</p>
+            <a href="mailto:support@indeksa.com?subject=Indeksa%20App%20Feedback" class="btn btn-secondary">Contact Support</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="copyright">&copy; 2026 Indeksa</div>
+            <div class="footer-links">
+                <a href="#download">Download APK</a>
+                <a href="#privacy-policy">Privacy Policy</a>
+                <a href="#terms">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+```
